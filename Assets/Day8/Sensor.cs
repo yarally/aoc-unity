@@ -1,5 +1,5 @@
 using System;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public class Sensor : MonoBehaviour
@@ -12,16 +12,24 @@ public class Sensor : MonoBehaviour
     {
         _controller = FindObjectOfType<Day8Controller>();
         _startPos = transform.position;
+        StartCoroutine(UpdateAsync());
     }
 
-    void Update()
+    IEnumerator UpdateAsync()
     {
-        transform.position += transform.forward * 0.01f;
-        var x = transform.position.x;
-        var z = transform.position.z;
-        if (x < 0 || x > _controller.Size || z < 0 || z > _controller.Size)
+        while (true)
         {
-            Kill();
+            transform.position += transform.forward * 0.5f;
+            var pos = transform.position;
+            var x = pos.x;
+            var z = pos.z;
+            if (x < 0 || x > _controller.Size || z < 0 || z > _controller.Size)
+            {
+                Kill();
+                yield break;
+            }
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Day8Controller : MonoBehaviour
@@ -38,6 +39,10 @@ public class Day8Controller : MonoBehaviour
 
         foreach (var tree in FindObjectsOfType<Tree>())
         {
+            while (FindObjectsOfType<Sensor>().Length > 400)
+            {
+                yield return null;
+            }
             tree.FindScenicScore();
         }
 
@@ -67,7 +72,7 @@ public class Day8Controller : MonoBehaviour
 
                 godTree.transform.localScale *= 5;
                 godTree.GetComponentInChildren<Animator>().Play(0);
-                Debug.Log(godTree.Score);
+                FindObjectOfType<TextMeshProUGUI>().text = "Highest Score: " + godTree.Score;
                 break;
             }
         }
