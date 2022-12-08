@@ -8,6 +8,11 @@ public class Day8Controller : MonoBehaviour
     [SerializeField] private GameObject treePrefab;
 
     [SerializeField] private TextAsset input;
+    [SerializeField] private int spawnLimit;
+    [SerializeField] private float sensorStepSize;
+    [SerializeField] private float sensorInterval;
+    public float SensorStepSize => sensorStepSize;
+    public float SensorInterval => sensorInterval;
 
     public int Size { get; private set; }
 
@@ -39,13 +44,13 @@ public class Day8Controller : MonoBehaviour
 
         foreach (var tree in FindObjectsOfType<Tree>())
         {
-            while (FindObjectsOfType<Sensor>().Length > 400)
+            while (FindObjectsOfType<Sensor>().Length > spawnLimit)
             {
                 yield return null;
             }
             tree.FindScenicScore();
         }
-
+        
         yield return CheckScore();
     }
 
@@ -63,6 +68,7 @@ public class Day8Controller : MonoBehaviour
                 Tree godTree = null;
                 foreach (var tree in FindObjectsOfType<Tree>())
                 {
+                    Debug.Log(tree.transform.position + " :: " + tree.Score);
                     if (tree.Score > maxScore)
                     {
                         maxScore = tree.Score;

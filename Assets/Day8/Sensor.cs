@@ -19,7 +19,7 @@ public class Sensor : MonoBehaviour
     {
         while (true)
         {
-            transform.position += transform.forward * 0.5f;
+            transform.position += transform.forward * _controller.SensorStepSize;
             var pos = transform.position;
             var x = pos.x;
             var z = pos.z;
@@ -29,7 +29,7 @@ public class Sensor : MonoBehaviour
                 yield break;
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(_controller.SensorInterval);
         }
     }
 

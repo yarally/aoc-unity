@@ -14,7 +14,7 @@ public class Tree : MonoBehaviour
         Instantiate(sensor, position, Quaternion.Euler(Vector3.up * 90)).GetComponent<Sensor>().SetParent(this);
         Instantiate(sensor, position, Quaternion.Euler(Vector3.up * 180)).GetComponent<Sensor>().SetParent(this);
         Instantiate(sensor, position, Quaternion.Euler(Vector3.up * 270)).GetComponent<Sensor>().SetParent(this);
-        Instantiate(sensor, position, Quaternion.Euler(Vector3.up)).GetComponent<Sensor>().SetParent(this);
+        Instantiate(sensor, position, Quaternion.Euler(Vector3.zero)).GetComponent<Sensor>().SetParent(this);
     }
 
     public void ReceiveSensor(int score)
